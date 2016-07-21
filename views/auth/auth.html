@@ -1,0 +1,44 @@
+<form class="enter">
+	<label for="login_a">Логин</label>
+	<br>
+	<input class="txt" type="text" name="login" id="login_a" required>
+	<br>
+	<label for="pass_a">Пароль</label>
+	<br>
+	<input class="txt" type="password" name="pass" id="pass_a" required>
+	<br>
+	<input type="button" value="Авторизоваться" id="but_auth" class="button">
+	<!--	<a href="checkUser/auth" class="button" style="padding: 6px 35px; ">Авторизоваться</a>-->
+</form>
+<script src="template/jquery/jquery-1.11.1.min.js"></script>
+<script>
+	$('#but_auth').on('click', function () {
+		var js_login = $.trim($('#login_a').val());
+		var js_pass = $.trim($('#pass_a').val());
+		if (js_login !== '' && js_pass !== '') {
+			$.ajax({
+				url: 'checkUser/auth'
+				, type: 'post'
+				, data: {
+					login: js_login
+					, pass: js_pass
+				}
+			}).done(function (data) {
+				//alert(data);
+				data = data.substr(data.length-4,4);
+				if (data === "okay") {
+					//alert("Все ништяк");
+					//alert("Вы успешно авторизовались!");
+					/*$.cookie('id_u', data, {
+						path: '/',
+					});*/
+					//alert(data);
+					document.location.reload();
+				} else if (data === "dont") {
+					alert("Введены неверные данные. Попробуйте еще раз.");
+					
+				} else if (data === "empt") alert("Данные не переданы ");
+			});
+		} else alert('Форма не заполнена!');
+	});
+</script>

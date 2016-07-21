@@ -1,0 +1,76 @@
+.enter {
+	margin: 20px auto;
+	font-family: 'Roboto';
+	font-family: 'segoe print';
+}
+
+.enter .txt {
+	border: 1px solid #aaa;
+	box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+	border-radius: 2px;
+	height: 30px;
+	width: 100%;
+	padding: 5px;
+	margin: 5px auto;
+}
+.enter input:focus:invalid { /* when a field is considered invalid by the browser */
+	/*background: #fff url(images/invalid.png) no-repeat 98% center;*/
+	box-shadow: 0 0 5px #d45252;
+	border-color: #b03535
+}
+
+.enter .txt:focus {
+	background: #fff;
+	border: 1px solid #555;
+	box-shadow: 0 0 3px #aaa;
+}
+
+.button {
+	width: 100%;
+	height: 35px;
+	margin-top: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+	border: none;
+	/*	padding: 8px 35px;*/
+	background: rgb(212, 75, 56);
+	text-transform: uppercase;
+}
+
+.button:hover {
+	background: rgb(232, 95, 76);
+	cursor: pointer;
+}
+
+.button:active {
+	box-shadow: 0 0 10px 5px rgb(192, 55, 36) inset;
+}
+
+.block > div,
+.block > input {
+	display: none;
+}
+
+.block>label{
+	margin-right: -5px;
+	padding: 5px;
+	border: 1px solid #aaa;
+	line-height: 26px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 3px;
+	
+}
+
+.block input[type="radio"]:checked + label {
+	border-bottom: 2px solid #fff;
+}
+
+.block > input:nth-of-type(1):checked ~ div:nth-of-type(1),
+.block > input:nth-of-type(2):checked ~ div:nth-of-type(2) {
+	border-radius: 5px;
+	display: block;
+	padding: 15px;
+	border: 1px solid #aaa;
+}

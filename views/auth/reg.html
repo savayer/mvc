@@ -1,0 +1,59 @@
+<form class="enter" id="reg-form">
+	<div class="form-group" >
+		<label for="email">Email</label><br>
+		<input class="txt" type="email" name="email" id="em" required>
+		<br>
+	</div>
+	<div class="form-group" >
+		<label for="_login">Логин	</label><br>
+		<input class="txt" type="text" name="login" id="_login" required><br>
+	</div>
+	<div class="form-group">
+		<label for="pass">Пароль</label><br>
+		<input class="txt" type="password" name="pass" id="_pass" required>
+	</div>
+	<div class="form-group">
+		<label for="pass2">Повторите пароль</label><br>
+		<input class="txt" type="password" name="pass" id="_pass2" required>
+	</div>
+	<input type="button" value="Зарегистрироваться" id="reg-btn" class="button">
+</form>
+<script src="template/jquery/jquery-1.11.1.min.js"></script>
+<script>
+	$('#reg-btn').on('click', function () {
+		var js_email = $.trim($('#em').val());
+		var js_login = $.trim($('#_login').val());
+		var js_pass1 = $.trim($('#_pass').val());
+		var js_pass2 = $.trim($('#_pass2').val());
+		var pass = false;
+		var r = /^\w+@\w+\.\w{2,4}$/i;
+		var email = false;
+		if (!r.test(js_email)) {
+			email = false;
+		} else email = true;
+		
+		if (js_pass1 === js_pass2) pass = true 
+			else pass = false;
+		
+		if (email && pass) {
+			$.ajax({
+				url: 'checkUser/reg'
+				, type: 'post'
+				, data: { email: js_email,
+					login: js_login
+					, pass: js_pass1
+				}
+			}).done(function (data) {
+				//alert(data);
+				data = data.substr(data.length-4,4);
+				if (data === "okay") {
+					alert("На вашу почту выслано сообщение с дополнительной информацией\nВы можете авторизоваться");
+				} else if (data === "dont") {
+					alert("Не удалось отправить сообщение");
+
+				} else if (data === "name") alert("Такой логин/email уже зарегистрирован");
+			});	
+		} else alert("Проверьте корректность введенных данных");
+
+	});
+</script>
